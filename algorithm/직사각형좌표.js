@@ -22,28 +22,99 @@ v	result
  */
 function solution(v) {
 
-    let xArr = [];
-    let yArr = [];
+    const xMap = new Map();
+    const yMap = new Map();
+
     for (let i = 0; i < v.length; i++) {
         let dot = v[i];
-        for(let j = 0; j < dot.length; j++){
-            //xArr.push()
+
+        if(xMap.has(dot[0])) {
+            xMap.set(dot[0], xMap.get(dot[0]) + 1);
+        } else {
+            xMap.set(dot[0], 1);
+        }
+
+        if(yMap.has(dot[1])) {
+            yMap.set(dot[1], yMap.get(dot[1]) + 1);
+        } else {
+            yMap.set(dot[1], 1);
         }
 
     }
 
-    var answer = [
-        []
-    ];
+    var answer =[];
 
-    console.log('Hello Javascript')
+    for(let [key, value] of xMap) {
+        if(value === 1)
+            answer[0] = key;
+        console.log(`${key} = ${value}`);
+    }
+
+    for(let [key, value] of yMap) {
+        if(value === 1)
+            answer[1]= key;
+        console.log(`${key} = ${value}`);
+    }
+
+
 
     return answer;
 }
+
+console.log(solution([[1, 4], [3, 4], [3, 10]]));
+
+function solutionIf(v) {
+    var answer = [0, 0];
+    // x좌표 구하기
+    /*
+    if(v[0][0] == v[1][0]) { // 첫번째 x좌표와 두번째 x좌표가 같을 경우 세번째 x좌표값이 구하고자 하는 x좌표값이 된다.
+        answer[0] = v[2][0];
+    } else if (v[0][0] == v[2][0]) { // 첫번째 x좌표와 세번째 x좌표가 같을 경우 두번째 x좌표값이 구하고자 하는 x좌표값이 된다.
+        answer[0] = v[1][0];
+    } else if (v[1][0] == v[2][0]) { // 두번째 x좌표와 세번째 x좌표가 같을 경우 첫번째 x좌표값이 구하고자 하는 x좌표값이 된다.
+        answer[0] = v[0][0]
+    }
+
+// y좌표 구하기
+    if(v[0][1] == v[1][1]){ // 첫번째 y좌표와 두번째 y좌표가 같을 경우 세번째 y좌표값이 구하고자 하는 y좌표값이 된다.
+        answer[1] = v[2][1];
+    } else if (v[0][1] == v[2][1]){ // 첫번째 y좌표와 세번째 y좌표가 같을 경우 두번째 y좌표값이 구하고자 하는 y좌표값이 된다.
+        answer[1] = v[1][1];
+    } else if (v[1][1] == v[2][1]){ // 두번째 y좌표와 세번째 y좌표가 같을 경우 첫번째 y좌표값이 구하고자 하는 y좌표값이 된다.
+        answer[1] = v[0][1];
+    }
+
+     */
+
+    // i가 0일 때 = x좌표, i가 1일 때 = y좌표
+    for(let i=0; i<answer.length; i++){
+        if(v[0][i] == v[1][i]){
+            answer[i] = v[2][i];
+        } else if(v[0][i] == v[2][i]){
+            answer[i] = v[1][i];
+        } else if(v[1][i] == v[2][i]){
+            answer[i] = v[0][i];
+        }
+    }
+    return answer;
+}
+
+console.log(solutionIf([[1, 4], [3, 4], [3, 10]]));
+
+function solutionXOR(v) {
+    let answer = [0,0];
+
+    answer[0] = v[0][0] ^ v[1][0] ^ v[2][0]; // 0001 ^ 0011 ^ 0011 = (0010) ^ 0011 = 0001
+    answer[1] = v[0][1] ^ v[1][1] ^ v[2][1]; // 0100 ^ 0100 ^ 1010 = (0000) ^ 1010 = 1010
+    return answer;
+}
+
+console.log(solutionXOR([[1, 4], [3, 4], [3, 10]]));
 
 /*
 + y 좌표가 같은 점 두 개와 x좌표가 같은 점 두개를 구한 후 예를 들어 (1,4), (3,4) 는 y좌표가 4로 같고 (3,4), (3,10)은 x좌표 3으로 같습니다.
 그러면 x 좌표의 경우 1, y좌표의 경우 10이 중복되지 않은 좌표인데 해당 좌표가 나머지 한 점의 좌표가 됩니다. x좌표 중 중복되지 않는 좌표 count가 1인 경우
 y좌표 중 중복되지 않은 좌표 count가 1인 경우를 각각 구합니다. (1, 4)가 왔을 때 x좌표 1 : 1개, y좌표 4 : 1개, 두번째로 (3,4)에 대해서 3 :1개, 4 :2개
-세번째로 (3,10)에 대해 3 : 2개, 10 : 1개
+세번째로 (3,10)에 대해 3 : 2개, 10 : 1개. 결과적으로 x좌표는 1,3 : 2개, y좌표 4,10 : 2개로 이루어진 직사각형이 만들어지는 것을 알 수 있습니다.
+ map으로 해당 자료를 저장할 경우 1,3,4,10 key에 대해 value가 각각 2가 되는 것을 알 수 있습니다.
  */
