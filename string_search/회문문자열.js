@@ -13,3 +13,27 @@ gooG
 ▣ 출력예제 1
 YES
  */
+
+function checkString(s) {
+    let answer = "YES";
+    var upS = s.toUpperCase();
+    var middle = Math.ceil(upS.length / 2);
+    var length = s.length;
+    for(var i = 0; i < length; i++ ) {
+        console.log(`${upS.charAt(i) } : ${upS.charAt(length - i - 1) }`)
+        if (upS.charAt(i) !== upS.charAt(length - i - 1)) {
+            answer = "NO";
+            return answer;
+        }
+    }
+    return answer;
+}
+
+console.log(checkString("gooG"));
+console.log(checkString("abooba"));
+/*
+문자열의 대소문자 구분을 없애기 위해서 전부 대문자로 바꾼후에 가장 앞의 요소와 뒤의 요소부터 시작해서 순차적으로 비교하고 같은지 확인합니다.
+문자열이 2자리인 경우 0,1 [ length /2 = 2 /2 = 1 ] . 3자리인 경우 0,2 [ 3/2 = 1]. 4자리인 경우 (0,3), (1,2 [4/2 = 2]. 5자리인 경우 (0, 4), (1,3) [ 5/2 = 2] 순으로 비교합니다.
+첫번째 요소와 마지막 요소가 같고, 두번째 요소와 마지막 요소-1, 세번째 요소와 마지막 요소 - 2 => (length /2)까지 수행합니다.
+하나라도 다른 것이 있으면 NO를 입력하고 break.
+* */
