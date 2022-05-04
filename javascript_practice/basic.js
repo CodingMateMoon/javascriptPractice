@@ -88,6 +88,72 @@ console.log("ceil : " + ceil);
 const floor = Math.floor(1.22); // 1
 console.log(`floor : ${floor}`);
 
+/*
+숫자 -> 문자로 변환 String(), 객체.toString()
+ */
+
+var num = 10;
+var s1 = String(num);
+var s2 = num.toString();
+console.log(`${num} : ${s1} : ${s2}`);
+console.log(typeof num);
+console.log(typeof s1);
+console.log(typeof s2);
 
 
+/**
+ * split
+ */
+const str = 'The quick brown fox jumps over the lazy dog.';
 
+const words = str.split(' ');
+console.log(words[3]);
+// expected output: "fox"
+
+const chars = str.split('');
+console.log(chars[8]);
+// expected output: "k"
+
+const strCopy = str.split();
+console.log(strCopy);
+// expected output: Array ["The quick brown fox jumps over the lazy dog."]
+
+/**
+ String -> Number , toNumber, 숫자로 변환
+ */
+// 숫자를 스트링로 바꾸기
+var tt = 2
+tt += "";
+
+// 스트링을 숫자로 바꾸기
+tt = "2"
+tt *= 1;
+
+
+// 스트링을 숫자로 바꾸기
+tt = "2"
+tt = Number(tt);
+tt = parseInt(tt);
+tt = parseFloat(tt);
+
+parseInt("123.456");        // 123
+parseInt("100mile");        // 100
+parseInt("w25");               // NaN
+parseInt("05");                  // 5
+/*
+Javascript에서 "0"으로 시작하는 숫자는 8진수 "0x"로 시작하는 숫자는 16진수로 정의되고 있기 때문에
+아래에서 9가 8진수에서 사용할 수 없기 때문에 의도하지 않은 0이 나왔습니다.
+ */
+parseInt("09");                  // 0
+
+parseInt("0x35");              // 53
+parseInt("1101", 2);         // 13
+parseInt("09", 10);            // 9
+parseInt("10", 8);              // 8
+
+parseFloat("123.456");       // 123.456
+parseFloat("100.5mile");    // 100.5
+parseFloat("w25");               // NaN
+parseFloat("05");                  // 5
+parseFloat("09");                  // 9
+parseFloat("0x35");              // 0
