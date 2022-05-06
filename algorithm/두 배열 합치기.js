@@ -33,17 +33,16 @@ function solution(n, nArr, m, mArr) {
         }
         answer.push(input);
     }
-    if (nIndex == n) {
-        while (mIndex < m) {
-            answer.push(mArr[mIndex]);
-            mIndex++;
-        }
-    } else {
-        while (nIndex < n) {
-            answer.push(nArr[nIndex]);
-            nIndex++;
-        }
+    while (mIndex < m) {
+        answer.push(mArr[mIndex]);
+        mIndex++;
     }
+
+    while (nIndex < n) {
+        answer.push(nArr[nIndex]);
+        nIndex++;
+    }
+
     return answer;
 }
 
